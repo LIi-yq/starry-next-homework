@@ -8,7 +8,7 @@
 
 ## 2. 新增功能模块
 
-本次新增代码分为两类相互独立的功能模块。
+新增代码分为两类相互独立的功能模块。
 
 ### Group A: 进程 / 系统信息 / 时间接口测试
 
@@ -55,7 +55,7 @@
 
 ## 3. 新增文件结构
 
-本次新增了如下文件：
+新增了如下文件：
 - `apps/libc/c/homework_common.h`
 - `apps/libc/c/homework_uname/homework_uname.c`
 - `apps/libc/c/homework_gettid/homework_gettid.c`
