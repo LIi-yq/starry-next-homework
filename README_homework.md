@@ -4,8 +4,6 @@
 
 This homework is based on the `starry-next` baseline repository.
 
-To satisfy the requirement of adding a non-trivial amount of new code, I implemented a user-space libc syscall test suite under `apps/libc/c/`. The added code focuses on validating Linux-compatible interfaces that already exist in the baseline repository.
-
 The main goal of this homework is not to redesign the whole kernel, but to extend the repository with a structured, test-oriented, user-space verification module.
 
 ## 2. Main Added Functional Modules
