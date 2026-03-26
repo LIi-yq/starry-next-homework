@@ -1,18 +1,18 @@
 # Starry-next Homework Supplement
 
-## 1. Project Overview
+## 1. 项目概述
 
-This homework is based on the `starry-next` baseline repository.
+本次作业基于 `starry-next` 基线仓库完成。
 
-The main goal of this homework is not to redesign the whole kernel, but to extend the repository with a structured, test-oriented, user-space verification module.
+本次新增内容的核心目标是：在现有仓库基础上，补充一个结构清晰、可组织、可展示的用户态测试模块。
 
-## 2. Main Added Functional Modules
+## 2. 新增功能模块
 
-The newly added code is divided into two independent functional groups.
+本次新增代码分为两类相互独立的功能模块。
 
-### Group A: Process / System Information / Time Interfaces
+### Group A: 进程 / 系统信息 / 时间接口测试
 
-This group tests process and time related interfaces:
+该模块主要测试以下系统调用或相关接口：
 
 - `uname`
 - `gettid`
@@ -23,11 +23,17 @@ This group tests process and time related interfaces:
 - `gettimeofday`
 - `nanosleep`
 
-These tests verify basic system information retrieval, process-related behavior, time query interfaces, and sleep timing behavior.
+这一部分主要用于验证：
+- 系统基本信息获取是否正常；
+- 进程与线程相关接口是否可用；
+- 时间读取接口是否可用；
+- 睡眠与时间推进逻辑是否正确。
 
-### Group B: Memory / File / Output / Signal Interfaces
+---
 
-This group tests memory, file, and signal related interfaces:
+### Group B: 内存 / 文件 / 输出 / 信号接口测试
+
+该模块主要测试以下接口：
 
 - `write`
 - `open`
@@ -39,12 +45,18 @@ This group tests memory, file, and signal related interfaces:
 - `signal`
 - `alarm`
 
-These tests verify file IO behavior, stdout output, memory mapping behavior, page protection changes, and basic signal delivery behavior.
+这一部分主要用于验证：
 
-## 3. Added File Structure
+- 标准输出写入行为；
+- 文件创建、读取与描述符复制行为；
+- 匿名内存映射与读写行为；
+- 内存保护属性修改；
+- 信号注册、发送与定时信号行为。
 
-The following files are newly added:
+---
+## 3. 新增文件结构
 
+本次新增了如下文件：
 - `apps/libc/c/homework_common.h`
 - `apps/libc/c/homework_uname/homework_uname.c`
 - `apps/libc/c/homework_gettid/homework_gettid.c`
@@ -62,38 +74,30 @@ The following files are newly added:
 - `apps/libc/c/homework_signal_basic/homework_signal_basic.c`
 - `apps/libc/c/homework_signal_alarm/homework_signal_alarm.c`
 
-The following existing file is updated:
-
+同时修改了以下已有文件：
 - `apps/libc/testcase_list`
 
-## 4. Design Idea
+## 4. 设计思路
 
-The implementation uses the existing `apps/libc/c/` mechanism of the repository.
+本次实现遵循仓库现有的 `apps/libc/c/` 测试组织方式。
 
-Each test is placed in its own directory and compiled as an independent user-space test program. A common header file `homework_common.h` is added to reduce repeated boilerplate and unify checking logic, assertion helpers, timing conversion helpers, file helpers, and output formatting.
+每个测试程序单独放在一个目录下，编译后作为一个独立的用户态测试程序运行。为了减少重复代码，并统一输出风格、检查逻辑和辅助函数，我新增了一个公共头文件 `homework_common.h`，用于封装基本输出函数；条件检查与结果断言；时间差计算；文件读写辅助；数据填充与校验；通用工具函数。
 
-This design improves:
+这种设计的优点是：
 
-- code organization
-- readability
-- reusability
-- consistency of test output
+- 代码结构更清晰；
+- 各测试之间解耦；
+- 复用性更好；
+- 输出风格统一，便于自动检查和截图展示。
 
-## 5. Installation and Environment
+## 5. 环境准备
 
-A typical environment includes:
+典型环境包括：
 
-- Linux or WSL Ubuntu
-- the `starry-next` source tree
-- the repository-provided `apps/libc` build workflow
+- Linux 或 WSL Ubuntu
+- `starry-next` 源码仓库
+- 仓库自带的 `apps/libc` 构建流程
 
-If needed, dependency installation can follow the repository baseline instructions. This homework mainly focuses on source-level addition and organization.
+如果需要完整运行测试，可参考仓库原有说明完成环境准备。
 
-## 6. Build Method
 
-The libc user-space tests are placed under `apps/libc/c/`, so they can be managed by the existing libc build path.
-
-Typical build usage:
-
-```bash
-make -C apps/libc ARCH=x86_64 TARGET=gnu build_c
