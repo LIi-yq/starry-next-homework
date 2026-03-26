@@ -1,0 +1,13 @@
+[patch.'https://github.com/oscomp/arceos.git']
+axfeat = { path = "/starry/.arceos/api/axfeat" }
+
+axconfig = { path = "/starry/.arceos/modules/axconfig" }
+axfs = { path = "/starry/.arceos/modules/axfs" }
+axhal = { path = "/starry/.arceos/modules/axhal" }
+axlog = { path = "/starry/.arceos/modules/axlog" }
+axmm = { path = "/starry/.arceos/modules/axmm" }
+axnet = { path = "/starry/.arceos/modules/axnet" }
+axns = { path = "/starry/.arceos/modules/axns" }
+axruntime = { path = "/starry/.arceos/modules/axruntime" }
+axsync = { path = "/starry/.arceos/modules/axsync" }
+axtask = { path = "/starry/.arceos/modules/axtask" }
